@@ -5,17 +5,17 @@ const auth=require("../middleware/auth")
 BookingRoute.post("/Book",auth, async (req, res) => {
     const { doctor, patient, date, time ,email} = req.body
     try {
-        if (!validateDateFormat(date)) {
-            return res.status(400).json({ error: "Invalid date format. Please use dd/mm/yy format." })
-        }
+        // if (!validateDateFormat(date)) {
+        //     return res.status(400).json({ error: "Invalid date format. Please use dd/mm/yy format." })
+        // }
     
-        if (!validateTimeFormat(time)) {
-            return res.status(400).json({ error: "Invalid Time format. Please use 24 hrs clock only and use only AM and PM.Time must be between 9 AM to 8PM" })
-        }
+        // if (!validateTimeFormat(time)) {
+        //     return res.status(400).json({ error: "Invalid Time format. Please use 24 hrs clock only and use only AM and PM.Time must be between 9 AM to 8PM" })
+        // }
         
-        const existingAppointment = await BookingModel.findOne({ doctor,date,time,email });
+        const existingAppointment = await BookingModel.findOne({ doctor,date,time });
         if (existingAppointment) {
-            return res.status(409).json({ message: 'This time slot is already booked.' });
+            return res.status(409).json({ error: 'This time slot is already booked.' });
         }
         return res.status(200).json({msg:"This time slot is available"})
     } catch (error) {
