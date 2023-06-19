@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 const jwt = require('jsonwebtoken')
-const { BlacklistModel } = require('../Google_Oauth/models/blacklist')
+const { BlacklistModel } = require('../model/blacklistmodel')
 
 
 const sendVerificationMail = async (name, email, userId) => {
@@ -132,7 +132,7 @@ userrouter.post("/register", async (req, res) => {
     try {
       const token = req.headers?.authorization;
       if (!token) return res.status(403);
-      let blackListedToken = new BlackListModel({ token });
+      let blackListedToken = new BlacklistModel({token})
       await blackListedToken.save();
       res.send({ msg: "logout succesfull" });
     } catch (error) {
