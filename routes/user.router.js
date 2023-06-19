@@ -56,7 +56,7 @@ userrouter.post("/register", async (req, res) => {
   
       const hash = await bcrypt.hash(password, 8);
   
-      const newUser = new UserModel({ name, email, password: hash.role });
+      const newUser = new UserModel({ name, email, password: hash,role });
   
       const userData = await newUser.save();
       if (userData) {
