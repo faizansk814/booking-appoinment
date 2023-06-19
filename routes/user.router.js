@@ -90,7 +90,7 @@ userrouter.post("/register", async (req, res) => {
         token,
         username: isUserPresent.name,
         userId: isUserPresent._id,
-        isVerified:isUserPresent.isVerified
+        role:isUserPresent.role
       });
     } catch (error) {
       res.status(401).send(error.message);
