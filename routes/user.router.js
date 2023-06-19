@@ -66,7 +66,7 @@ userrouter.post("/register", async (req, res) => {
         res.status(401).json({ msg: "Registration failed" });
       }
     } catch (error) {
-      res.status(400).json({ msg: "Something went wrong" });
+      res.status(400).json({ msg: error.message });
     }
   });
   
