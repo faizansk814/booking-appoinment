@@ -46,7 +46,7 @@ const sendVerificationMail = async (name, email, userId) => {
 
 userrouter.post("/register", async (req, res) => {
     try {
-      const { name, email, password } = req.body;
+      const { name, email, password,role } = req.body;
   
       const userExist = await UserModel.findOne({ email });
   
@@ -56,7 +56,7 @@ userrouter.post("/register", async (req, res) => {
   
       const hash = await bcrypt.hash(password, 8);
   
-      const newUser = new UserModel({ name, email, password: hash });
+      const newUser = new UserModel({ name, email, password: hash.role });
   
       const userData = await newUser.save();
       if (userData) {
