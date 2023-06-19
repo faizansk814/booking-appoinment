@@ -29,7 +29,7 @@ const sendVerificationMail = async (name, email, userId) => {
       from: "anshita674@gmail.com",
       to: email,
       subject: "For verification mail",
-      html: `<p>Hi ${name}, please click here to <a href="http://localhost:8080/user/verify?id=${userId}">verify</a> your mail</p>`,
+      html: `<p>Hi ${name}, please click here to <a href="https://gentle-sunglasses-wasp.cyclic.app/user/verify?id=${userId}">verify</a> your mail</p>`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
