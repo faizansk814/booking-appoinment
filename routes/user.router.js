@@ -10,7 +10,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 
 const jwt = require('jsonwebtoken')
-const { BlacklistModel } = require('../Google_Oauth/models/blacklist')
+const {BlackListModel}=require("../model/blacklistmodel")
 
 
 const sendVerificationMail = async (name, email, userId) => {
