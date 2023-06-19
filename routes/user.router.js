@@ -59,12 +59,7 @@ userrouter.post("/register", async (req, res) => {
       const newUser = new UserModel({ name, email, password: hash,role });
   
       const userData = await newUser.save();
-      if (userData) {
-        sendVerificationMail(name, email, userData._id);
-        res.status(200).json({ msg: "Registration successful", userData });
-      } else {
-        res.status(401).json({ msg: "Registration failed" });
-      }
+      res.status(200).json({ msg: "Registration successful", userData });
     } catch (error) {
       res.status(400).json({ msg: error.message });
     }
@@ -102,30 +97,30 @@ userrouter.post("/register", async (req, res) => {
     }
   });
 
-  userrouter.get("/verify", async (req, res) => {
-    try {
-      const userId = req.query.id;
+  // userrouter.get("/verify", async (req, res) => {
+  //   try {
+  //     const userId = req.query.id;
   
-      const user = await UserModel.updateOne(
-        { _id: userId },
-        {$set:{isVerified:true}}
-      );
-      if (!user) {
-        return res
-          .status(404)
-          .json({ error: "User not found" });
-      }
+  //     const user = await UserModel.updateOne(
+  //       { _id: userId },
+  //       {$set:{isVerified:true}}
+  //     );
+  //     if (!user) {
+  //       return res
+  //         .status(404)
+  //         .json({ error: "User not found" });
+  //     }
   
-      if (user.isVerified) {
-        return res.status(200).json({ message: "Email already verified" });
-      }
+  //     if (user.isVerified) {
+  //       return res.status(200).json({ message: "Email already verified" });
+  //     }
   
-      res.sendFile(path.join(__dirname, "../public/pages/verify.html"));
-    } catch (error) {
-      console.log(error);
-      res.status(500).json({ error: "Internal server error" });
-    }
-  });
+  //     res.sendFile(path.join(__dirname, "../public/pages/verify.html"));
+  //   } catch (error) {
+  //     console.log(error);
+  //     res.status(500).json({ error: "Internal server error" });
+  //   }
+  // });
   
   
   userrouter.get("/logout", async (req, res) => {
